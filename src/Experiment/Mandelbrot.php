@@ -14,6 +14,11 @@ class Mandelbrot
     private $yResolution;
 
     /**
+     * @var float
+     */
+    private $angle = 0;
+
+    /**
      * @param int $xResolution
      * @param int $yResolution
      */
@@ -34,14 +39,33 @@ class Mandelbrot
         $ret = '';
         for ($y = 0; $y <= $this->yResolution; $y++) {
             for ($x = 0; $x <= $this->xResolution; $x++) {
+
                 $ch = abs($to->i - $from->i);
                 $cw = abs($to->r - $from->r);
-                $c = new Complex($from->r + $x * $cw/$this->xResolution, $from->i - $y * $ch/$this->yResolution);
+                $r = $from->r + $x * $cw/$this->xResolution;
+                $i = $from->i - $y * $ch/$this->yResolution;
+
+                $cr = ($to->r + $from->r)/2;
+                $ci = ($to->i + $from->i)/2;
+
+                $rr = $r - $cr;
+                $ri = $i - $ci;
+
+                $rr_ = $rr * cos($this->angle) - $ri * sin($this->angle);
+                $ri_ = $ri * cos($this->angle) + $rr * sin($this->angle);
+
+                $c = new Complex($cr + $rr_, $ci + $ri_);
                 $ret .= $this->dot($c, $iteration);
             }
             $ret .= PHP_EOL;
         }
         return $ret;
+    }
+
+    public function setRotation($angle)
+    {
+        $this->angle = $angle;
+        return $this;
     }
 
     /**
