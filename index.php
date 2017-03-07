@@ -21,5 +21,4 @@ for ($bound = 4; ; $bound /= $speed) {
 
     echo "\033[1;1f"; // cursor to top-left corner
     echo $mandelbrot->setRotation($rot+=0.1)->render($from, $to, $iterations);
-    usleep(20000);
 }
