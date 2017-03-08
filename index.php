@@ -15,9 +15,9 @@ $rot = 0;
 for ($bound = 4; ; $bound /= $speed) {
     $iterations = min(20000, 100 + sqrt(1/$bound));
     $from = clone $coord;
-	$from->add(new Experiment\Complex(-$bound, $bound));
+    $from->add(new Experiment\Complex(-$bound, $bound));
     $to = clone $coord;
-	$to->add(new Experiment\Complex($bound, -$bound));
+    $to->add(new Experiment\Complex($bound, -$bound));
 
     echo "\033[1;1f"; // cursor to top-left corner
     echo $mandelbrot->setRotation($rot+=0.1)->render($from, $to, $iterations);
