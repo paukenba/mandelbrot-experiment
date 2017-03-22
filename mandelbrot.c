@@ -18,7 +18,7 @@ int ct[] = {
     201,200,199,198,197
 };
 
-int colorOf(iteration) {
+int colorOf(int iteration) {
     return ct[iteration % 30];
 }
 
